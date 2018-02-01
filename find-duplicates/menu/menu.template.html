@@ -1,0 +1,17 @@
+<md-card>
+  <md-card-content>
+    <md-input-container layout="row" layout-align="center center">
+      <label>CSV Delimiter</label>
+      <md-select aria-label="delimiter"
+                 class="md-no-underline"
+                 ng-model="$ctrl.delimiter"
+                 ng-model-options="{getterSetter: true, trackBy: '$value.name'}">
+        <!--<md-select-label>{{ delimiter.name }}</md-select-label>-->
+        <md-option ng-repeat="delimiter in $ctrl.delimiters"
+                   ng-value="delimiter">
+          {{ delimiter.name }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </md-card-content>
+</md-card>

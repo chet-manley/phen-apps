@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <title>Phentastic App</title>
+  <base href="/" />
+  <meta name="description" content="Phentastic App" />
+  <meta name="keywords" content="Phen's database duplicate finder" />
+  <meta name="viewport" content="initial-scale=1" />
+  <!-- favicons -->
+  <!-- /favicons -->
+  <meta name="apple-mobile-web-app-title" content="Phentastic App" />
+  <meta name="application-name" content="Phentastic App" />
+  <meta name="msapplication-TileColor" content="#5545EE" />
+  <!--
+  <meta name="msapplication-TileImage" content="http://xxx/assets/img/icons/mstile-144x144.png?v=KmmKNJ4BNb" />
+  <meta name="msapplication-config" content="http://xxx/assets/img/icons/browserconfig.xml?v=KmmKNJ4BNb" />
+  -->
+  <meta name="theme-color" content="#FFFFFF" />
+
+  <!-- fonts -->
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto|Material+Icons" />
+  <!-- styles -->
+  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.6/angular-material.min.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="assets/css/print.css" />
+</head>
+
+<body ng-app="phenApps">
+  <md-content>
+    <phen-toolbar></phen-toolbar>
+
+    <div layout="row">
+      <span flex="20"></span>
+      <div ng-view flex></div>
+      <span flex="20"></span>
+    </div>
+
+  </md-content>
+
+  <!-- libraries -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-animate.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-aria.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-route.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.6/angular-material.min.js"></script>
+  <!-- app -->
+  <script src="app.module.js"></script>
+  <script src="app.config.js"></script>
+  <!-- core services -->
+  <script src="core/core.module.js"></script>
+  <script src="core/data/data.module.js"></script>
+  <script src="core/data/data.service.js"></script>
+  <script src="core/menu/menu.module.js"></script>
+  <script src="core/menu/menu.service.js"></script>
+  <script src="core/menu/menu.component.js"></script>
+  <script src="core/toolbar/toolbar.module.js"></script>
+  <script src="core/toolbar/toolbar.component.js"></script>
+  <script src="core/drag-drop/drag-drop.module.js"></script>
+  <script src="core/drag-drop/drag-drop.directive.js"></script>
+  <script src="core/drag-drop/drag-drop.component.js"></script>
+  <!-- components -->
+  <script src="find-duplicates/find-duplicates.module.js"></script>
+  <script src="find-duplicates/find-duplicates.component.js"></script>
+  <script src="find-duplicates/menu/menu.module.js"></script>
+  <script src="find-duplicates/menu/menu.component.js"></script>
+</body>
+</html>

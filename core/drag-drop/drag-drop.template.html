@@ -1,0 +1,11 @@
+<md-input-container class="md-block">
+  <!--<label>Input data or drag CSV files here</label>-->
+  <textarea drop-zone
+            do-drop="$ctrl.drop"
+            ng-model="$ctrl.updateInput"
+            md-detect-hidden
+            md-select-on-focus
+            placeholder="Input data or drag CSV files here"
+            rows="10">
+  </textarea>
+</md-input-container>

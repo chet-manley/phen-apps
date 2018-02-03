@@ -1,5 +1,5 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
   /* create controller */
   function Controller(dataSvc, menuSvc) {
@@ -26,21 +26,21 @@
             'value': '|'
           }
         }
-      };
+      }
 
       // set default data
-      dataSvc('options:delimiter', this.options.delimiters.tabs);
-      dataSvc('options:delimiters', this.options.delimiters);
-      dataSvc('app:title', this.options.menu.title);
-      menuSvc.create(this.options.menu);
-      menuSvc.activate(this.options.menu.name);
-      this.files = [];
-      this.input = '';
-    };
+      dataSvc('options:delimiter', this.options.delimiters.tabs)
+      dataSvc('options:delimiters', this.options.delimiters)
+      dataSvc('app:title', this.options.menu.title)
+      menuSvc.create(this.options.menu)
+      menuSvc.activate(this.options.menu.name)
+      this.files = []
+      this.input = ''
+    }
     /* deconstructor */
     this.$onDestroy = () => {
       //
-    };
+    }
 
     /* TODO
      * toast notifications
@@ -50,12 +50,12 @@
      */
 
     this.updateFiles = file => {
-      this.files.push(file);
-    };
+      this.files.push(file)
+    }
   }
 
   /* inject controller dependencies */
-  Controller.$inject = ['Data', 'Menu'];
+  Controller.$inject = ['Data', 'Menu']
 
   /* register component to our module */
   angular
@@ -63,5 +63,5 @@
     .component('findDuplicates', {
       controller: Controller,
       templateUrl: 'find-duplicates/find-duplicates.template.html'
-    });
-}(window.angular));
+    })
+})(window.angular)

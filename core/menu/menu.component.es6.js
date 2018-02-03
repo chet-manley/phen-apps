@@ -1,4 +1,4 @@
-(function (angular) {
+(angular => {
   'use strict'
 
   /* create controller */
@@ -30,4 +30,4 @@
       controller: Controller,
       templateUrl: 'core/menu/menu.template.html'
     })
-}(window.angular))
+})(window.angular)

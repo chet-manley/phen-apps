@@ -1,5 +1,5 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
   /* define app module and dependencies */
   angular
@@ -8,5 +8,5 @@
       'ngRoute',
       'core',
       'findDuplicates'
-    ]);
-}(window.angular));
+    ])
+})(window.angular)

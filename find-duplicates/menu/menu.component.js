@@ -1,26 +1,26 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
   /* create controller */
   function Controller(dataSvc) {
     /* constructor */
     this.$onInit = () => {
-      this.delimiters = dataSvc('options:delimiters');
-    };
+      this.delimiters = dataSvc('options:delimiters')
+    }
     /* deconstructor */
     this.$onDestroy = () => {
       //
-    };
+    }
 
     this.delimiter = (...args) => {
       return args.length
         ? (dataSvc('options:delimiter', args[0]))
-        : dataSvc('options:delimiter');
-    };
+        : dataSvc('options:delimiter')
+    }
   }
 
   /* inject controller dependencies */
-  Controller.$inject = ['Data'];
+  Controller.$inject = ['Data']
 
   /* register component to our module */
   angular
@@ -31,5 +31,5 @@
       },
       controller: Controller,
       templateUrl: 'find-duplicates/menu/menu.template.html'
-    });
-}(window.angular));
+    })
+})(window.angular)

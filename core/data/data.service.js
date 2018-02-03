@@ -1,23 +1,23 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
   /* create service */
-  function Service() {
-    var data = {},
-      svc = function svc(key, value) {
-        if (!arguments.length) { return data; }
-        if (arguments.length === 1) { return data[key]; }
-        return (data[key] = value);
-      };
+  function Service () {
+    let data = {},
+      svc = function svc (key, value) {
+        if (!arguments.length) { return data }
+        if (arguments.length === 1) { return data[key] }
+        return (data[key] = value)
+      }
 
-    return svc;
+    return svc
   }
 
   /* inject service dependencies */
-  Service.$inject = [];
+  Service.$inject = []
 
   /* register service to our module */
   angular
     .module('core.data')
-    .factory('Data', Service);
-}(window.angular));
+    .factory('Data', Service)
+})(window.angular)

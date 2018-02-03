@@ -1,0 +1,22 @@
+{
+  "name": "phenApps",
+  "version": "1.0.0",
+  "description": "Apps for Phen",
+  "keywords": [],
+  "author": {
+    "name": "Chet Manley",
+    "url": "https://github.com/chet-manley"
+  },
+  "license": "MIT",
+  "main": "app.module.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chet-manley/phen-apps.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0"
+  }
+}

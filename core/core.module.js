@@ -1,5 +1,5 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
   /* define module and dependencies */
   angular
@@ -8,5 +8,5 @@
       'core.dragDrop',
       'core.menu',
       'core.toolbar'
-    ]);
-}(window.angular));
+    ])
+})(window.angular)

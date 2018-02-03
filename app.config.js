@@ -1,5 +1,5 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
   /* define app routes */
   angular
@@ -8,7 +8,7 @@
       '$locationProvider',
       '$routeProvider',
       ($locationProvider, $routeProvider) => {
-        $locationProvider.hashPrefix('!');
+        $locationProvider.hashPrefix('!')
         $routeProvider
           .when('/', {
             redirectTo: '/find-duplicates'
@@ -17,7 +17,7 @@
             //templateUrl: 'find-duplicates/find-duplicates.template.html'
             template: '<find-duplicates></find-duplicates>'
           })
-          .otherwise('/');
+          .otherwise('/')
       }
-    ]);
-}(window.angular));
+    ])
+})(window.angular)

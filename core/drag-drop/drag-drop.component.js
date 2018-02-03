@@ -1,32 +1,32 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
   /* create controller */
-  function Controller(dataSvc) {
+  function Controller () {
     /* constructor */
     this.$onInit = () => {
       //
-    };
+    }
     /* deconstructor */
     this.$onDestroy = () => {
       //
-    };
+    }
 
     // handle dropped payload
     this.drop = data => {
       // text payload
       if (!data.files.length) {
-        return this.updateInput += data.getData('text/plain');
+        return this.updateInput += data.getData('text/plain')
       }
       // file payload
       for (let file of data.files) {
-        this.updateFiles({ '$file': file });
+        this.updateFiles({ '$file': file })
       }
-    };
+    }
   }
 
   /* inject dependencies */
-  Controller.$inject = [];
+  Controller.$inject = []
 
   /* register component to our module */
   angular
@@ -38,5 +38,5 @@
       },
       controller: Controller,
       templateUrl: 'core/drag-drop/drag-drop.template.html'
-    });
-}(window.angular));
+    })
+})(window.angular)

@@ -1,7 +1,7 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
   /* define module and dependencies */
   angular
-    .module('core.data', []);
-}(window.angular));
+    .module('core.data', [])
+})(window.angular)

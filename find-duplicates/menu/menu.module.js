@@ -1,8 +1,8 @@
-(function (angular) {
-  'use strict';
+(angular => {
+  'use strict'
 
-  /* define our custom module and dependencies */
+  /* define module and dependencies */
   angular.module('findDuplicates.menu', [
     'core.data'
-  ]);
-}(window.angular));
+  ])
+})(window.angular)

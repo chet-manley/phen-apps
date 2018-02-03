@@ -67,7 +67,7 @@ module.exports = {
     'no-lonely-if': 'error',
     'no-tabs': 'warn',
     'no-trailing-spaces': 'warn',
-    'quotes': ['error', 'single', {'avoidEscape': false}],
+    'quotes': ['error', 'single', {'avoidEscape': true}],
     'semi': ['error', 'never']
   }
 }

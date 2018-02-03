@@ -1,11 +1,14 @@
-<md-input-container class="md-block">
-  <!--<label>Input data or drag CSV files here</label>-->
-  <textarea drop-zone
-            do-drop="$ctrl.drop"
-            ng-model="$ctrl.updateInput"
-            md-detect-hidden
-            md-select-on-focus
-            placeholder="Input data or drag CSV files here"
-            rows="10">
-  </textarea>
-</md-input-container>
+
+<md-button aria-label="drop files here"
+           class="md-fab md-primary bounce"
+           ng-click="angular.noop()">
+  <md-icon>file_download<!--cloud_download--></md-icon>
+</md-button>
+<h2 class="md-display-3">drop files here</h2>
+<div class="drop-target">
+  <md-button aria-label="cancel file drop"
+             class="md-fab md-warn"
+             ng-click="$ctrl.cancelDrop($event)">
+    <md-icon>cancel</md-icon>
+  </md-button>
+</div>

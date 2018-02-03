@@ -3,26 +3,52 @@
 
   /* create directive */
   function DropZone($document) {
-    let link = (scope, element) => {
-        // prevent browser from hijacking drag'n'drop
+    const link = (scope, element) => {
+        // save element for later
+        scope.$ctrl.cancelDrop = () => {
+          element.parent().removeClass('drop-in-progress')
+          element.removeClass('over-target')
+        }
+        // flip drop zone over to expose target
+        $document.on('dragstart', event => {
+          event.dataTransfer.dropEffect = 'none'
+          element.parent().addClass('drop-in-progress')
+        })
+        $document.on('dragenter', event => {
+          event.dataTransfer.dropEffect = 'none'
+          element.parent().addClass('drop-in-progress')
+        })
+        // prevent browser from hijacking drops
         $document.on('dragover', event => {
-          if (!event.target.attributes['drop-zone']) {
-            event.stopPropagation()
+          if ( !event.target.classList.contains('drop-target') ) {
             event.preventDefault()
             event.dataTransfer.dropEffect = 'none'
           }
         })
-        $document.on('drop', event => {
-          event.stopPropagation()
-          event.preventDefault()
-        })
         // add styles on hover
-        element.on('dragover', event => {
-          //
+        element.on('dragenter', event => {
+          event.preventDefault()
+          event.dataTransfer.dropEffect = 'copy'
+          element.addClass('over-target')
         })
+        // prevent defaults while hovering
+        element.on('dragover', event => {
+          event.preventDefault()
+          event.dataTransfer.dropEffect = 'copy'
+        })
+        // remove styles on hover exit
+        element.on('dragleave', event => {
+          event.dataTransfer.dropEffect = 'none'
+          element.removeClass('over-target')
+        })
+        // the drop catcher
         element.on('drop', event => {
-          scope.drop(event.dataTransfer)
+          event.preventDefault()
+          scope.$ctrl.drop(event.dataTransfer)
           scope.$apply()
+          // flip drop zone back over
+          element.parent().removeClass('drop-in-progress')
+          element.removeClass('over-target')
         })
         // cleanup after drag'n'drop ends
         element.on('dragend', event => {
@@ -32,9 +58,14 @@
       Directive = {
         'restrict': 'A',
         'scope': {
-          'drop': '<doDrop'
+          'updateFiles': '&',
+          'updateInput': '='
         },
-        'link': link
+        'bindToController': true,
+        'controller': 'dropZoneController',
+        'controllerAs': '$ctrl',
+        'link': link,
+        'templateUrl': 'core/drag-drop/drag-drop.template.html'
       }
     return Directive
   }

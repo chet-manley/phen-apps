@@ -26,16 +26,13 @@
   <link rel="stylesheet" type="text/css" media="print" href="assets/css/print.css" />
 </head>
 
-<body ng-app="phenApps">
-  <md-content>
+<body ng-app="phenApps" layout="column" layout-align="start stretch">
+  <md-content flex="grow">
     <phen-toolbar></phen-toolbar>
 
-    <div layout="row">
-      <span flex="20"></span>
-      <div ng-view flex></div>
-      <span flex="20"></span>
+    <div flex layout="row" layout-align="center stretch">
+      <div ng-view flex="55"></div>
     </div>
-
   </md-content>
 
   <!-- libraries -->
@@ -45,8 +42,8 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-route.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.6/angular-material.min.js"></script>
   <!-- main app module -->
-  <script src="app.module.js"></script>
-  <script src="app.config.js"></script>
+  <script src="core/app.module.js"></script>
+  <script src="core/app.config.js"></script>
   <!-- core modules -->
   <script src="core/core.module.js"></script>
   <script src="core/data/data.module.js"></script>
@@ -56,12 +53,11 @@
   <script src="core/menu/menu.component.js"></script>
   <script src="core/toast/toast.module.js"></script>
   <script src="core/toast/toast.service.js"></script>
-  <script src="core/toast/toast.component.js"></script>
   <script src="core/toolbar/toolbar.module.js"></script>
   <script src="core/toolbar/toolbar.component.js"></script>
   <script src="core/drag-drop/drag-drop.module.js"></script>
   <script src="core/drag-drop/drag-drop.directive.js"></script>
-  <script src="core/drag-drop/drag-drop.component.js"></script>
+  <script src="core/drag-drop/drag-drop.controller.js"></script>
   <!-- app modules -->
   <script src="find-duplicates/find-duplicates.module.js"></script>
   <script src="find-duplicates/find-duplicates.component.js"></script>

@@ -7,6 +7,7 @@
       'core.data',
       'core.dragDrop',
       'core.menu',
+      'core.toast',
       'core.toolbar'
     ])
 })(window.angular)

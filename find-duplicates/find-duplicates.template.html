@@ -1,9 +1,42 @@
-<md-card>
-  <md-card-content>
-    <drag-drop update-files="$ctrl.updateFiles($file)"
-               update-input="$ctrl.input">
-    </drag-drop>
+<md-card class="drop-zone">
+  <md-card-content class="dz-front">
 
+    <md-input-container class="md-block">
+      <textarea ng-model="$ctrl.input"
+                md-detect-hidden
+                md-select-on-focus
+                placeholder="Input data or drag CSV files here"
+                rows="10">
+      </textarea>
+    </md-input-container>
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button class="md-raised md-warn"
+                 ng-click="$ctrl.clearAll()"
+                 ng-disabled="!$ctrl.input.length && !$ctrl.files.length">
+        Clear All
+      </md-button>
+      <span flex></span>
+      <md-button class="md-raised md-primary"
+                 ng-click="$ctrl.clearAll()"
+                 ng-disabled="!$ctrl.files.length">
+        Process Files
+      </md-button>
+      <md-button class="md-raised md-primary"
+                 ng-click="$ctrl.clearAll()"
+                 ng-disabled="!$ctrl.input.length">
+        Process Text
+      </md-button>
+    </md-card-actions>
+
+  </md-card-content>
+
+  <md-card-content drop-zone
+                   class="dz-rear"
+                   layout="column"
+                   layout-align="center center"
+                   update-files="$ctrl.updateFiles($file)"
+                   update-input="$ctrl.input">
   </md-card-content>
 </md-card>
 
@@ -16,14 +49,14 @@
       </md-button>
       <div class="md-list-item-text">
         <h3>{{ file.name }}</h3>
-        <h4><em>{{ file.type }}</em></h4>
+        <h4><em>{{ file.type || 'unknown filetype' }}</em></h4>
         <p>
           {{ file.size / 1000 | number : 2 }} kB
         </p>
         <!--<span class="file-size">{{ file.size }}</span>-->
       </div>
-      <md-button class="md-secondary md-fab md-warn">
-        <md-icon>close</md-icon>
+      <md-button class="md-icon-button md-warn" ng-click="$ctrl.updateFiles([$index])">
+        <md-icon ng-style="{'font-size':32+'px'}">cancel</md-icon>
       </md-button>
       <md-divider ng-if="!$last"></md-divider>
     </md-list-item>

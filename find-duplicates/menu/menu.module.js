@@ -2,7 +2,5 @@
   'use strict'
 
   /* define module and dependencies */
-  angular.module('findDuplicates.menu', [
-    'core.data'
-  ])
+  angular.module('findDuplicates.menu', [])
 })(window.angular)

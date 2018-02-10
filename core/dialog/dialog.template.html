@@ -1,0 +1,12 @@
+<md-toolbar class="md-toolbar-tools">
+  <h2>{{ $ctrl.dialog.title }}</h2>
+  <span flex></span>
+  <md-button aria-label="close"
+             class="md-icon-button"
+             ng-click="$ctrl.close($event)"
+             ng-hide="$ctrl.locked">
+    <md-icon>close</md-icon>
+  </md-button>
+</md-toolbar>
+
+<md-dialog-content></md-dialog-content>

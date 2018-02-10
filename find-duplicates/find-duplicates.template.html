@@ -18,12 +18,12 @@
       </md-button>
       <span flex></span>
       <md-button class="md-raised md-primary"
-                 ng-click="$ctrl.clearAll()"
+                 ng-click="$ctrl.processFiles()"
                  ng-disabled="!$ctrl.files.length">
         Process Files
       </md-button>
       <md-button class="md-raised md-primary"
-                 ng-click="$ctrl.clearAll()"
+                 ng-click="$ctrl.processInput()"
                  ng-disabled="!$ctrl.input.length">
         Process Text
       </md-button>
@@ -35,8 +35,8 @@
                    class="dz-rear"
                    layout="column"
                    layout-align="center center"
-                   update-files="$ctrl.updateFiles($file)"
-                   update-input="$ctrl.input">
+                   add-files="$ctrl.addFiles($files)"
+                   update-input="$ctrl.updateInput">
   </md-card-content>
 </md-card>
 
@@ -55,7 +55,7 @@
         </p>
         <!--<span class="file-size">{{ file.size }}</span>-->
       </div>
-      <md-button class="md-icon-button md-warn" ng-click="$ctrl.updateFiles([$index])">
+      <md-button class="md-icon-button md-warn" ng-click="$ctrl.removeFile($index)">
         <md-icon ng-style="{'font-size':32+'px'}">cancel</md-icon>
       </md-button>
       <md-divider ng-if="!$last"></md-divider>
@@ -65,6 +65,17 @@
 
 <md-card>
   <md-card-content>
-    Output goes here. {{ $ctrl.input }}
+    <md-list ng-repeat="data in $ctrl.output">
+      <md-list-item layout="row"
+                    layout-align="space-around stretch"
+                    ng-repeat="(key, values) in data.duplicates">
+        <div flex="33">
+          {{ key }}
+        </div>
+        <span flex layout="row" layout-align="center stretch" ng-repeat="value in values">
+          <span>{{ value }}</span>
+        </span>
+      </md-list-item>
+    </md-list>
   </md-card-content>
 </md-card>

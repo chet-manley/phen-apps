@@ -5,15 +5,20 @@
   function Controller (menuSvc, $compile, $element, $scope) {
     /* constructor */
     this.$onInit = () => {
-      this.close = menuSvc.close
+      /* $onInit is BROKEN when used with mdDialog */
+      // close action handler
+      //this.close = menuSvc.close
+      // get requested menu
+      //this.menu = menuSvc.get(this.menuName)
     }
     /* deconstructor */
     this.$onDestroy = () => {
       //
     }
 
-    // get active menu
-    this.menu = menuSvc.get('active')
+    // a terrible hack until $onInit is fixed
+    this.menu = menuSvc.get($element[0].attributes['menu-name'].value)
+    this.close = menuSvc.close
 
     // compile menu items and append to this dialog
     let compiled = $compile(this.menu.template)($scope.$new(true))
@@ -27,7 +32,10 @@
   angular
     .module('core.menu')
     .component('phenU', {
-      controller: Controller,
-      templateUrl: 'core/menu/menu.template.html'
+      'bindings'   : {
+        'menuName': '@',
+      },
+      'controller' : Controller,
+      'templateUrl': 'core/menu/menu.template.html',
     })
 })(window.angular)

@@ -5,18 +5,19 @@ module.exports = {
     'browser': true,
     'worker': false,
     'node': false,
-    'shared-node-browser': false
+    'shared-node-browser': false,
   },
 
   'extends': [
-    'eslint:recommended'
+    'eslint:recommended',
   ],
 
   'parserOptions': {
     'ecmaVersion': 2017,
     'ecmaFeatures': {
       'experimentalObjectRestSpread': false
-    }
+    },
+    'sourceType': 'module',
   },
 
   'rules': {
@@ -26,14 +27,14 @@ module.exports = {
       'prefer': {
         'param': 'arg',
         'parameter': 'argument',
-        'return': 'returns'
-      }
+        'return': 'returns',
+      },
     }],
     // best practice rules
     'curly': 'error',
     'dot-location': ['error', 'property'],
     'dot-notation': ['error', {
-      'allowKeywords': false
+      'allowKeywords': true
     }],
     'eqeqeq': ['error', 'smart'],
     'guard-for-in': 'error',
@@ -42,7 +43,7 @@ module.exports = {
     'no-eq-null': 'error',
     'no-eval': 'error',
     'no-magic-numbers': ['error', {
-      'ignore': [0, 1]
+      'ignore': [0, 1, 100]
     }],
     'no-new': 'error',
     'no-new-func': 'error',
@@ -60,7 +61,14 @@ module.exports = {
     // style rules
     'comma-dangle': ['warn', 'only-multiline'],
     'eol-last': ['warn', 'always'],
-    'indent': ['error', 2],
+    'indent': ['error', 2, {
+      "VariableDeclarator": {
+        "var": 2,
+        "let": 2,
+        "const": 3
+      },
+      "SwitchCase": 1,
+    }],
     'implicit-arrow-linebreak': ['error', 'beside'],
     'linebreak-style': ['warn', 'unix'],
     'new-cap': 'error',

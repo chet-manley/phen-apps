@@ -3,7 +3,7 @@
 
   /* define module and dependencies */
   angular
-    .module('core.menu', [
+    .module('core.dialog', [
       'ngMaterial',
     ])
 })(window.angular)

@@ -3,7 +3,7 @@
 
   /* define module and dependencies */
   angular
-    .module('core.toast', [
-      'ngMaterial'
+    .module('core.files.read', [
+      'core.uuid',
     ])
 })(window.angular)

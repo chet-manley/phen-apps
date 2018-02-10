@@ -1,14 +1,25 @@
 (angular => {
   'use strict'
 
-  /* create service */
-  function Service () {
-    let data = {},
-      svc = function svc (key, value) {
-        if (!arguments.length) { return data }
-        if (arguments.length === 1) { return data[key] }
-        return (data[key] = value)
-      }
+  /* define service factory */
+  const Service = () => {
+    // initialize internal service variables
+    const data = {}
+
+    /**
+     * Gets and sets data values by key.
+     * @argument {String} key - a menu object
+     * @argument {Any} value - value of data
+     * @returns  {Object} data Object if no arguments
+     * @returns  {Any} key's value if key argument
+     * @returns  {Any} set key's passed value if key and value arguments
+     */
+    const svc = (...args) => {
+      if (!args.length) { return data }
+      const [key, value] = args
+      if (args.length === 1) { return data[key] }
+      return (data[key] = value)
+    }
 
     return svc
   }

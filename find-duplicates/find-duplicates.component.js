@@ -2,40 +2,52 @@
   'use strict'
 
   /* create controller */
-  function Controller(dataSvc, menuSvc, toastSvc) {
+  function Controller(dataSvc, duplicateParser, fileSvc, menuSvc, toastSvc) {
     /* constructor */
     this.$onInit = () => {
       // menu options for this component
       this.options = {
-        'menu': {
-          'name': 'find-duplicates',
-          'title': 'Duplicate Finder',
-          'template': '<find-duplicates-menu menu="$ctrl.menu"></find-duplicates-menu>'
-        },
         'delimiters': {
           'tabs': {
-            'name': 'Tabs',
-            'value': '\t'
+            'name' : 'Tabs',
+            'value': '\t',
           },
           'commas': {
-            'name': 'Commas',
-            'value': ','
+            'name' : 'Commas',
+            'value': ',',
           },
           'pipes': {
-            'name': 'Pipes',
-            'value': '|'
-          }
-        }
+            'name' : 'Pipes',
+            'value': '|',
+          },
+        },
+        'dialogs': [
+          {
+            'name'    : 'file-process',
+            'title'   : 'Processing files...',
+            'template': '<file-process-dialog></file-process-dialog>',
+          },
+        ],
+        'menu': {
+          'name'    : 'find-duplicates',
+          'title'   : 'Duplicate Finder',
+          'template': '<find-duplicates-menu></find-duplicates-menu>',
+        },
       }
 
       // set default data
       dataSvc('options:delimiter', this.options.delimiters.tabs)
       dataSvc('options:delimiters', this.options.delimiters)
       dataSvc('app:title', this.options.menu.title)
-      menuSvc.create(this.options.menu)
-      menuSvc.activate(this.options.menu.name)
-      this.files = []
-      this.input = ''
+      menuSvc.register(this.options.menu, true)
+
+      this.files  = fileSvc.get()
+      this.input  = ''
+      this.output = [{
+        'duplicates': {},
+        'headers': {},
+        'source': '',
+      }]
 
       return void 0
     }
@@ -44,66 +56,26 @@
       //
     }
 
-    /* internal methods */
-    const isDuplicate = f => {
-      // check against file name, size and type
-        return this.files.find( el => {
-          if ( el.name === f.name
-            && el.size === f.size
-            && el.type === f.type ) { return true }
-          return false
-        } )
-      },
-      addFile = f => {
-        // check if file is already in array
-        if ( isDuplicate(f) ) {
-          toastSvc.show({
-            'text': `File ${f.name} already in queue`,
-            'class': 'md-toast-error'
-          })
-          return false
-        }
-        // add file to files array
-        this.files.push(f)
-        toastSvc.show({ 'text': `File ${f.name} queued for processing` })
-        return true
-      },
-      removeFiles = a => {
-        // allow multiple indexes to be removed at once
-        a.filter( f => {
-          // splice returns array of removed elements, we are only removing one
-          let [removed] = this.files.splice(f, 1)
-          toastSvc.show({
-            'text': `File ${removed.name} removed`,
-            'class': 'md-toast-error'
-          })
-          return !!removed
-        })
-      }
-
     /**
      * TODO
+     * process files
      * parse files
+     * output results
      */
 
     /**
-     * Add to or remove from the files array.
-     * @argument {Blob} file - a fileList or Array of indexes
-     * @returns {boolean|null} true on success, false on fail, null on error
-     */
-    this.updateFiles = file => {
-      // set new file
-      if ( file instanceof Blob ) { return addFile(file) }
-      // remove file(s)
-      if ( file instanceof Array && file.length ) { return removeFiles(file) }
-      // something went wrong
-      return null
+    * Add files to list.
+    * @argument {FileList} data - a FileList
+    * @returns  {Boolean|null} true: update performed, false: file was duplicate, null: error
+    */
+    this.addFiles = data => {
+      return fileSvc.update(data)
     }
 
     /**
-     * Clear all data from inputs.
+     * Handle clear data event.
      * @argument {none} none - accepts no arguments
-     * @returns {boolean} true:false
+     * @returns  {Boolean} true if data cleared, false if there was no data
      */
     this.clearAll = () => {
       let cleared = false
@@ -112,24 +84,79 @@
         cleared = true
       }
       if ( this.files.length ) {
-        this.files = []
+        fileSvc.clear()
         cleared = true
       }
       // display toast with results
       if ( cleared ) { toastSvc.show({ 'text': 'All data removed', 'class': '' }) }
       else { toastSvc.show({ 'text': 'No data to remove', 'class': '' }) }
-      return cleared ? true : false
+      return cleared
+    }
+
+    /**
+     * Handle process files event.
+     * @argument {none} none - accepts no arguments
+     * @returns  {false} to Event
+     */
+    this.processFiles = () => {
+      fileSvc.read()
+        .then( results => {
+          let update = duplicateParser(results.results)
+          console.log(this.output)
+          this.updateOutput(update)
+          console.log(this.output)
+
+          return update
+        })
+      return false
+    }
+
+    /**
+     * Handle process input event.
+     * @argument {Event} event - the Event object
+     * @returns  {undefined} no return required
+     */
+    this.processInput = event => {
+      console.log(`Processing request for input: ${this.input.length} chars`)
+      return void 0
+    }
+
+    /**
+     * Handle remove file event.
+     * @argument {Number} index - index of file in array
+     * @returns  {Boolean} true if File removed, else false
+     */
+    this.removeFile = index => {
+      return fileSvc.update([index])
+    }
+
+    /**
+     * Update the input string.
+     * @argument {String} text - string from textarea
+     * @returns  {String} the concatenated string
+     */
+    this.updateInput = text => {
+      return (this.input += text)
+    }
+
+    /**
+     * Update the output object.
+     * @argument {Array} update - an Array of Objects
+     * @returns  {Array} the updated Array
+     */
+    this.updateOutput = update => {
+      return (angular.copy(update, this.output))
     }
   }
 
   /* inject controller dependencies */
-  Controller.$inject = ['Data', 'Menu', 'Toaster']
+  Controller.$inject = ['Data', 'DuplicateParser', 'Files', 'Menu', 'Toaster']
 
   /* register component to our module */
   angular
     .module('findDuplicates')
     .component('findDuplicates', {
-      controller: Controller,
-      templateUrl: 'find-duplicates/find-duplicates.template.html'
+      'controller' : Controller,
+      'templateUrl': 'find-duplicates/find-duplicates.template.html'
     })
 })(window.angular)

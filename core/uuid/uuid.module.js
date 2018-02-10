@@ -3,7 +3,5 @@
 
   /* define module and dependencies */
   angular
-    .module('core.menu', [
-      'ngMaterial',
-    ])
+    .module('core.uuid', [])
 })(window.angular)

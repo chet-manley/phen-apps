@@ -2,8 +2,7 @@
   'use strict'
 
   /* define module and dependencies */
-  angular
-    .module('core.menu', [
-      'ngMaterial',
-    ])
+  angular.module('findDuplicates.dialogs', [
+    'core.data'
+  ])
 })(window.angular)

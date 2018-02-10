@@ -1,27 +1,30 @@
 (angular => {
   'use strict'
 
-  /* create controller */
+  /* define controller */
   function Controller () {
     /* constructor */
     this.$onInit = () => {
-      //
+      /**
+       * Handle drop events.
+       * @argument {Object} data - dataTransfer Object
+       * @returns  {undefined} no return required for this event handler
+       */
+      this.drop = data => {
+        // text payload
+        if (!data.files.length) {
+          return this.updateInput( data.getData('text/plain') )
+        }
+
+        // TODO basic file type checking (no binaries)
+
+        // file payload
+        return this.addFiles({ '$files': data.files })
+      }
     }
     /* deconstructor */
     this.$onDestroy = () => {
       //
-    }
-
-    // handle dropped payload
-    this.drop = data => {
-      // text payload
-      if (!data.files.length) {
-        return this.updateInput += data.getData('text/plain')
-      }
-      // file payload
-      for (let file of data.files) {
-        this.updateFiles({ '$file': file })
-      }
     }
   }
 

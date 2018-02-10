@@ -3,14 +3,9 @@
 
   /* define module and dependencies */
   angular
-    .module('core', [
-      'core.data',
+    .module('core.files', [
       'core.dialog',
-      'core.dragDrop',
-      'core.files',
-      'core.menu',
       'core.toaster',
-      'core.toolbar',
-      'core.uuid',
+      'core.files.read',
     ])
 })(window.angular)

@@ -12,7 +12,7 @@
       //
     }
 
-    this.menu = menuSvc.open
+    this.menu  = menuSvc.open
     this.title = () => dataSvc('app:title')
   }
 
@@ -23,7 +23,7 @@
   angular
     .module('core.toolbar')
     .component('phenToolbar', {
-      controller: Controller,
-      templateUrl: 'core/toolbar/toolbar.template.html'
+      'controller' : Controller,
+      'templateUrl': 'core/toolbar/toolbar.template.html'
     })
 })(window.angular)
